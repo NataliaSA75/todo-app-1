@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class ToDoApp {
     public static void main(String[] args) {
@@ -43,6 +44,35 @@ public class ToDoApp {
                         System.out.printf("%d: %s%n", i, all.get(i));
                     }
                     if (all.isEmpty()) System.out.println("(empty)");
+                    break;
+
+                case "clear":
+                    list.clear();
+                    System.out.println("Todo list was cleared!");
+                    break;
+
+                case "done":
+                    try {
+                        int index = scanner.nextInt();
+                        list.done(index);
+                        System.out.println("Task with index " + index + " is completed!");
+                    }
+                    catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+                    break;
+
+                case "search":
+                    try {
+                        String substring = scanner.nextLine();
+
+                        Set<String> tasks = list.search(substring);
+
+                        tasks.forEach(System.out::println);
+                    }
+                    catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     break;
                 case "exit":
                     System.out.println("Bye!");
